@@ -1,5 +1,5 @@
-const WORK_TIME = 10; // test rapide
-const BREAK_TIME = 5;
+const WORK_TIME = 25 * 60; // test rapide
+const BREAK_TIME = 5 * 60;
 
 let remainingTime = WORK_TIME;
 let isWorkMode = true;
