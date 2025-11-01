@@ -48,15 +48,19 @@
 
       <div class="popup-row">
         <span>Theme</span>
-        <button class="option-btn">Light</button>
+        <button id="theme-toggle" class="option-btn">Light</button>
       </div>
 
       <div class="popup-row">
         <span>Alarm</span>
-        <button class="option-btn">Choose file</button>
+        <label class="option-btn">
+          <input type="file" id="alarm-input" accept="audio/*" style="display: none;">
+          Choose file
+        </label>
       </div>
     </div>
   </div>
+
 
   <script src="main.js"></script>
 </body>

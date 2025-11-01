@@ -193,3 +193,84 @@ hr {
   width: 16px;
   height: 16px;
 }
+
+/* --- DARK THEME --- */
+body.dark {
+  background-color: #1d1d1d;
+  color: #f7f7f7;
+}
+
+body.dark .timer,
+body.dark .label {
+  color: #f7f7f7;
+}
+
+body.dark .start-btn,
+body.dark .reset-btn,
+body.dark .option-btn {
+  border-color: #f7f7f7;
+  color: #f7f7f7;
+}
+
+body.dark .start-btn:hover,
+body.dark .reset-btn:hover,
+body.dark .option-btn:hover {
+  background: #f7f7f7;
+  color: #000;
+}
+
+body.dark .settings-popup {
+  background: #2a2a2a;
+  border-color: #f7f7f7;
+}
+
+body.dark hr {
+  border-top: 1px solid #f7f7f7;
+}
+
+/* Petite transition douce entre les thèmes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark .settings-btn .icon {
+  color: #f7f7f7; /* blanc */
+}
+
+body:not(.dark) .settings-btn .icon {
+  color: #000; /* noir (mode clair) */
+}
+
+/* --- SETTINGS ICON IN POPUP --- */
+body.dark .settings-popup .icon.small {
+  color: #f7f7f7; /* blanc en mode sombre */
+}
+
+body:not(.dark) .settings-popup .icon.small {
+  color: #000; /* noir en mode clair */
+}
+
+/* --- CLOSE BUTTON COLOR (popup "X") --- */
+body.dark .close-btn {
+  color: #f7f7f7; /* blanc en dark mode */
+}
+
+body:not(.dark) .close-btn {
+  color: #000; /* noir en mode clair */
+}
+
+.close-btn {
+  transition: color 0.3s ease;
+}
+
+.icon.small {
+  width: 16px;
+  height: 16px;
+  transition: color 0.3s ease;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}

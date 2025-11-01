@@ -1,18 +1,27 @@
-const WORK_TIME = 25 * 60;
-const BREAK_TIME = 5 * 60;
+const WORK_TIME = 10; // test rapide
+const BREAK_TIME = 5;
 
 let remainingTime = WORK_TIME;
 let isWorkMode = true;
 let isRunning = false;
 let timerInterval = null;
+let bell = new Audio("bell.mp3"); // sonnerie par défaut
 
+// Sélecteurs principaux
 const timerDisplay = document.getElementById("timer-display");
 const startBtn = document.getElementById("start-btn");
 const resetBtn = document.getElementById("reset-btn");
 const modeLabel = document.getElementById("mode-label");
 
-const bell = new Audio("bell.mp3");
+// --- SETTINGS ---
+const settingsBtn = document.querySelector(".settings-btn");
+const overlay = document.getElementById("settings-overlay");
+const settingsPopup = document.getElementById("settings-popup");
+const closePopup = document.getElementById("close-popup");
+const themeToggle = document.getElementById("theme-toggle");
+const alarmInput = document.getElementById("alarm-input");
 
+// --- TIMER LOGIC ---
 function updateDisplay() {
   const minutes = Math.floor(remainingTime / 60);
   const seconds = remainingTime % 60;
@@ -22,8 +31,6 @@ function updateDisplay() {
 }
 
 function updateResetVisibility() {
-  // En mode travail : visible uniquement si le timer tourne
-  // En mode pause : toujours visible
   if (!isWorkMode || (isWorkMode && isRunning)) {
     resetBtn.classList.remove("hidden");
   } else {
@@ -34,13 +41,10 @@ function updateResetVisibility() {
 function resetTimer() {
   clearInterval(timerInterval);
   isRunning = false;
-
-  // ✅ Toujours revenir au mode Work et à 10 secondes
   isWorkMode = true;
   remainingTime = WORK_TIME;
   modeLabel.textContent = "Work";
   startBtn.textContent = "Start";
-
   updateDisplay();
   updateResetVisibility();
 }
@@ -50,7 +54,7 @@ function switchMode() {
   remainingTime = isWorkMode ? WORK_TIME : BREAK_TIME;
   modeLabel.textContent = isWorkMode ? "Work" : "Break";
   updateDisplay();
-  startTimer(true); // démarre automatiquement l’autre phase
+  startTimer(true);
   updateResetVisibility();
 }
 
@@ -85,25 +89,26 @@ resetBtn.addEventListener("click", () => resetTimer());
 updateDisplay();
 updateResetVisibility();
 
-// --- Popup settings ---
-const settingsBtn = document.querySelector(".settings-btn");
-const overlay = document.getElementById("settings-overlay");
-const settingsPopup = document.getElementById("settings-popup");
-const closePopup = document.getElementById("close-popup");
-
-// Ouvrir le popup (avec animation)
-settingsBtn.addEventListener("click", () => {
-  overlay.classList.add("visible");
+// --- SETTINGS POPUP LOGIC ---
+settingsBtn.addEventListener("click", () => overlay.classList.add("visible"));
+closePopup.addEventListener("click", () => overlay.classList.remove("visible"));
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) overlay.classList.remove("visible");
 });
 
-// Fermer le popup avec le bouton X
-closePopup.addEventListener("click", () => {
-  overlay.classList.remove("visible");
+// --- THEME TOGGLE ---
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  themeToggle.textContent = document.body.classList.contains("dark")
+    ? "Dark"
+    : "Light";
 });
 
-// Fermer le popup si on clique en dehors
-overlay.addEventListener("click", (event) => {
-  if (event.target === overlay) {
-    overlay.classList.remove("visible");
+// --- CUSTOM ALARM FILE ---
+alarmInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const url = URL.createObjectURL(file);
+    bell = new Audio(url); // remplacer le son par le fichier choisi
   }
 });
