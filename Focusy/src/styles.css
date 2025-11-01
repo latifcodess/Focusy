@@ -8,7 +8,7 @@ body {
   font-family: 'JetBrains Mono', monospace;
 }
 
-.container {
+.content {
   position: relative;
   text-align: center;
 }
@@ -49,6 +49,13 @@ body {
   color: #000;
 }
 
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+
 .start-btn {
   font-size: 16px;
   font-family: 'JetBrains Mono', monospace;
@@ -63,4 +70,126 @@ body {
 .start-btn:hover {
   background: #000;
   color: #fff;
+}
+
+.reset-btn {
+  font-size: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 10px 40px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.reset-btn.hidden {
+  display: none;
+}
+
+/* --- OVERLAY FOND SOMBRE --- */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease; /* fondu doux */
+}
+
+.overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* --- POPUP --- */
+.settings-popup {
+  background: #f7f7f7;
+  border: 1px solid #000;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  width: 260px;
+
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.overlay.visible .settings-popup {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --- CONTENU DU POPUP --- */
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px;
+}
+
+hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #000;
+}
+
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.option-btn {
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: transparent;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.option-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.icon.small {
+  width: 16px;
+  height: 16px;
 }
